@@ -71,6 +71,28 @@ btns[2].addEventListener('click', () => {
     })
 })
 
+function addAllTask() {
+    let userData = addInputField.value.trim().toLowerCase();
+
+    if (userData.length === 0) return;
+
+    let allArr = JSON.parse(localStorage.getItem('All Todos')) || [];
+
+    allArr = allArr.map(item => item.toLowerCase());
+
+    if (!allArr.includes(userData)) {
+        allArr.unshift(userData);
+        localStorage.setItem("All Todos", JSON.stringify(allArr));
+        showtask();
+
+        addInputField.value = "";
+        addTaskBtn.classList.remove("active");
+        showNotification("ToDo is Added Successfully", "success");
+    } else {
+        showNotification("Task already exists", "danger");
+    }
+}
+
 
 function showAllTask() {
     document.addEventListener('click', () => {
@@ -108,11 +130,13 @@ showtask()
 addInputField.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         addTask();
+        addAllTask();
     }
 });
 
 addTaskBtn.onclick = () => {
     addTask();
+    addAllTask();
 };
 
 function addTask() {
