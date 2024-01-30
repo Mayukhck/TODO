@@ -94,13 +94,13 @@ function addAllTask() {
 }
 
 
-function showAllTask() {
+/* function showAllTask() {
     document.addEventListener('click', () => {
         addTask();
         showtask();
         showCompleteTask();
     });
-}
+} */
 
 addInputField.addEventListener('input', (event) => {
 
